@@ -1,14 +1,3 @@
--- ============================================================
--- Towards Recovery (Pulse) — Supabase schema
--- Run in the Supabase SQL editor.
---
--- DATA-PROTECTION DESIGN:
---  * We store ONLY numeric behavioural indicators + a derived score and an
---    emotion *label*. No camera frames, no images, no free text from the face
---    analysis ever reach the database.
---  * Row-Level Security guarantees a user can only read/write their OWN rows.
---  * Referrals store a minimal, consented summary — never raw indicators.
--- ============================================================
 
 create extension if not exists "pgcrypto";
 

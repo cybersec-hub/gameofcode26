@@ -136,7 +136,7 @@ export default function Landing() {
               <strong className="text-on-surface"> reactive</strong>, waiting on reported incidents or self-reporting.
             </p>
             <p className="mt-3 text-on-surface-variant">
-              Pulse shifts this to a <strong className="text-on-surface">proactive, community-centred</strong> model:
+              NEXOVERSE PATH  shifts this to a <strong className="text-on-surface">proactive, community-centred</strong> model:
               gentle daily reflection, AI that notices drift, and a consent-based path to real support.
             </p>
           </div>
@@ -169,7 +169,7 @@ export default function Landing() {
             <Cpu size={18} className="text-cyan" />
             <p className="text-xs font-semibold uppercase tracking-wider text-cyan">Under the hood</p>
           </div>
-          <h2 className="mt-2 text-2xl font-semibold lg:text-3xl">The Pulse AI engine</h2>
+          <h2 className="mt-2 text-2xl font-semibold lg:text-3xl">The NEXOVERSE PATH  AI engine</h2>
           <p className="mt-3 max-w-2xl text-sm text-white/60">
             A facial-emotion CNN runs in your browser; its output is fused with self-reported behaviour by a
             transparent risk model. Every decision is explainable and reviewed by a person.
@@ -274,7 +274,7 @@ export default function Landing() {
         <div className="mt-10 flex flex-col items-center gap-2 text-center">
           <div className="flex items-center gap-2">
             <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-ai-gradient text-xs font-bold text-white">P</span>
-            <span className="font-semibold">Pulse · Towards Recovery</span>
+            <span className="font-semibold">NEXOVERSE PATH  · Towards Recovery</span>
           </div>
           <p className="flex items-center gap-1.5 text-xs text-on-surface-variant">
             <AlertCircle size={12} /> A wellbeing tool — not a diagnostic device. In crisis, call Befrienders Mauritius 800 93 93.

@@ -31,7 +31,7 @@ export default function ReferralModal({ score, onClose }) {
           <div className="mt-4 space-y-4">
             <div className="rounded-lg bg-secondary-soft p-4 text-sm text-secondary">
               <ShieldCheck size={18} className="mb-2" />
-              You are in control. Pulse will only share what you approve, with the service you choose.
+              You are in control. NEXOVERSE PATH  will only share what you approve, with the service you choose.
               This is a request a person reviews — not an automatic report.
             </div>
             <p className="text-sm text-on-surface-variant">

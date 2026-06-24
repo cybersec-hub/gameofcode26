@@ -30,7 +30,7 @@ export default function Auth() {
   return (
     <div className="mx-auto flex min-h-screen max-w-md flex-col justify-center px-6">
       <Link to="/" className="mb-8 text-center text-2xl font-bold tracking-tight">
-        Pulse
+        NEXOVERSE PATH 
       </Link>
       <div className="card">
         <h1 className="text-2xl font-semibold">
@@ -40,12 +40,7 @@ export default function Auth() {
           Your space for reflection and support.
         </p>
 
-        {demo && (
-          <div className="mt-4 rounded-lg bg-secondary-soft px-4 py-3 text-sm text-secondary">
-            Demo mode is on (Supabase not configured). Continue to explore everything locally.
-          </div>
-        )}
-
+      
         <form onSubmit={submit} className="mt-5 space-y-3">
           <input
             type="email"

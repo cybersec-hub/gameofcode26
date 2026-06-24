@@ -24,7 +24,7 @@ export default function Layout() {
           <div className="flex items-center gap-3">
             <Menu size={22} className="text-on-surface" />
             <Link to="/app/dashboard" className="text-xl font-bold tracking-tight text-on-surface">
-              Pulse
+              NEXOVERSE PATH
             </Link>
           </div>
           <div className="flex items-center gap-3">

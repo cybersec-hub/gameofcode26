@@ -1,12 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Send, Sparkles, AlertCircle, MessageSquareHeart, Brain, BookOpen } from 'lucide-react'
 
-/**
- * Empathetic companion. Uses a transparent reflective-listening engine that
- * works fully offline for the demo, with crisis-term detection that surfaces
- * support resources immediately. To use a real LLM, replace `respond()` with
- * a fetch to your provider (the brief permits Gen-AI; keep the safety layer).
- */
+
 
 const CRISIS_TERMS = ['suicide', 'kill myself', 'end it', 'self harm', 'self-harm', 'overdose', "don't want to live"]
 
@@ -52,7 +47,7 @@ export default function Assistant() {
   const [messages, setMessages] = useState([
     {
       role: 'ai',
-      text: "Hello, I'm Pulse. I noticed you've had a busy week. How are you feeling today?",
+      text: "Hello, I'm NEXOVERSE PATH . I noticed you've had a busy week. How are you feeling today?",
     },
   ])
   const [input, setInput] = useState('')
@@ -78,7 +73,7 @@ export default function Assistant() {
           <Sparkles size={18} />
         </span>
         <div>
-          <p className="font-semibold">Pulse AI</p>
+          <p className="font-semibold">NEXOVERSE PATH</p>
           <p className="flex items-center gap-1.5 text-xs text-secondary">
             <span className="live-dot h-2 w-2 rounded-full bg-secondary" /> Always listening
           </p>
@@ -146,7 +141,7 @@ export default function Assistant() {
           <AlertCircle size={14} /> SAFETY DISCLAIMER
         </p>
         <p className="mt-1">
-          Pulse supports your wellbeing — it does not diagnose medical conditions. If you are in crisis,
+          NEXOVERSE PATH  supports your wellbeing — it does not diagnose medical conditions. If you are in crisis,
           contact Befrienders Mauritius (800 93 93) or emergency services (999).
         </p>
       </div>
