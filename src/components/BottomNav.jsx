@@ -6,6 +6,8 @@ const items = [
   { to: '/app/check-in', label: 'Check-In', icon: ClipboardCheck },
   { to: '/app/assistant', label: 'AI', icon: Sparkles },
   { to: '/app/community', label: 'Community', icon: Users },
+   { to: '/app/learn', label: 'Learn', icon: Users },
+    { to: '/app/journal', label: 'Journal', icon: Users },
 ]
 
 export default function BottomNav() {

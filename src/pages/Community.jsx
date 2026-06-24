@@ -493,14 +493,7 @@ export default function Community() {
         </div>
       </div>
 
-      {/* Floating button */}
-      <button
-        onClick={() => setComposing(true)}
-        className="fixed bottom-20 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-xl active:scale-95"
-        aria-label="Create anonymous post"
-      >
-        <Plus size={30} />
-      </button>
+     
     </div>
   )
 }

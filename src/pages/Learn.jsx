@@ -12,57 +12,94 @@ import {
   Timer,
   Sparkles,
   Heart,
+  Brain,
+  Waves,
+  Moon,
+  Activity,
+  Headphones,
+  Zap,
 } from 'lucide-react'
 
 const T = {
-  ink: '#1B2A2A',
-  inkSoft: '#516461',
-  faint: '#7B8C88',
-  base: '#F2F5F1',
-  base2: '#E7EEE9',
+  ink: '#111827',
+  inkSoft: '#374151',
+  faint: '#6B7280',
+
+  base: '#F7F8FC',
+  base2: '#F1F3F8',
   card: '#FFFFFF',
-  line: '#DBE6DF',
-  pine: '#2E6F5E',
-  pineDeep: '#21503F',
-  sage: '#6BA48E',
-  sageSoft: '#A9CABA',
-  mist: '#DCEAE2',
-  amber: '#DDA152',
-  coral: '#D58A77',
+  line: '#E5E7EB',
+
+  pine: '#6D28D9',
+  pineDeep: '#4C1D95',
+
+  sage: '#38BDF8',
+  sageSoft: '#E9D5FF',
+
+  mist: '#F3E8FF',
+  amber: '#7C3AED',
+  coral: '#EF4444',
+
+  cyan: '#38BDF8',
+  purple: '#6D28D9',
+  purpleSoft: '#EDE9FE',
 }
+
+const gradient = `linear-gradient(90deg, ${T.cyan}, ${T.purple})`
 
 const SESSIONS = [
   {
     id: 'b5',
-    title: '5-minute breathing',
-    desc: 'Box breathing to settle your nervous system.',
+    title: 'Box Breathing Reset',
+    short: 'Focus',
+    desc: 'A structured breathing pattern to calm your nervous system and regain control.',
     seconds: 300,
+    level: 'Beginner',
+    mood: 'Grounding',
+    color: '#6D28D9',
+    soft: '#F3E8FF',
+    icon: Brain,
+    prompt: 'Let your attention return to the rhythm. Nothing else needs to be solved right now.',
     cycle: [
       { phase: 'in', label: 'Breathe in', dur: 4 },
-      { phase: 'hold', label: 'Hold', dur: 4 },
+      { phase: 'hold', label: 'Hold gently', dur: 4 },
       { phase: 'out', label: 'Breathe out', dur: 4 },
       { phase: 'rest', label: 'Rest', dur: 4 },
     ],
   },
   {
     id: 'r10',
-    title: '10-minute relaxation',
-    desc: 'Slow breathing to release tension.',
+    title: 'Deep Calm Session',
+    short: 'Calm',
+    desc: 'A slower breathing session for stress, tension, and emotional overload.',
     seconds: 600,
+    level: 'Intermediate',
+    mood: 'Relaxation',
+    color: '#38BDF8',
+    soft: '#E0F2FE',
+    icon: Waves,
+    prompt: 'Relax your jaw, soften your shoulders, and allow the breath to slow down.',
     cycle: [
-      { phase: 'in', label: 'Breathe in', dur: 4 },
-      { phase: 'out', label: 'Breathe out', dur: 6 },
+      { phase: 'in', label: 'Slow inhale', dur: 4 },
+      { phase: 'out', label: 'Long exhale', dur: 6 },
     ],
   },
   {
     id: 'sleep',
-    title: 'Guided wind-down',
-    desc: 'A calm rhythm to ease your body into rest.',
+    title: 'Sleep Wind-Down',
+    short: 'Sleep',
+    desc: 'A gentle breathing flow designed to prepare your body for rest.',
     seconds: 420,
+    level: 'Easy',
+    mood: 'Wind-down',
+    color: '#4C1D95',
+    soft: '#EDE9FE',
+    icon: Moon,
+    prompt: 'Let the day end here. You can continue tomorrow with a clearer mind.',
     cycle: [
-      { phase: 'in', label: 'Breathe in', dur: 5 },
-      { phase: 'hold', label: 'Hold', dur: 2 },
-      { phase: 'out', label: 'Breathe out', dur: 6 },
+      { phase: 'in', label: 'Breathe in softly', dur: 5 },
+      { phase: 'hold', label: 'Pause', dur: 2 },
+      { phase: 'out', label: 'Release slowly', dur: 6 },
     ],
   },
 ]
@@ -130,7 +167,7 @@ function Card({ children, className = '', style = {} }) {
       style={{
         background: T.card,
         border: `1px solid ${T.line}`,
-        boxShadow: '0 1px 2px rgba(27,42,42,.04)',
+        boxShadow: '0 14px 40px rgba(17,24,39,.06)',
         ...style,
       }}
     >
@@ -139,37 +176,59 @@ function Card({ children, className = '', style = {} }) {
   )
 }
 
-function Orb({ phase = 'idle', running = false }) {
+function Orb({ phase = 'idle', running = false, color = T.purple }) {
   const scale =
     phase === 'in'
-      ? 'scale(1.12)'
+      ? 'scale(1.18)'
       : phase === 'out' || phase === 'rest'
-        ? 'scale(.78)'
+        ? 'scale(.76)'
         : 'scale(1)'
 
   return (
-    <div className="relative flex h-44 w-44 items-center justify-center">
+    <div className="relative flex h-56 w-56 items-center justify-center">
       <div
         className="absolute rounded-full"
         style={{
-          width: 176,
-          height: 176,
-          border: `1px solid ${T.sageSoft}`,
+          width: 220,
+          height: 220,
+          background: `radial-gradient(circle, ${color}20, transparent 68%)`,
+          animation: running ? 'nx-orb-glow 3.5s ease-in-out infinite' : 'none',
+        }}
+      />
+
+      <div
+        className="absolute rounded-full"
+        style={{
+          width: 188,
+          height: 188,
+          border: `1px solid ${color}55`,
           animation: running ? 'nx-ring 3s ease-out infinite' : 'none',
         }}
       />
 
       <div
-        className="rounded-full transition-all duration-1000 ease-in-out"
+        className="absolute rounded-full"
+        style={{
+          width: 150,
+          height: 150,
+          border: `1px dashed ${color}66`,
+          animation: running ? 'nx-spin 14s linear infinite' : 'none',
+        }}
+      />
+
+      <div
+        className="relative rounded-full transition-all duration-1000 ease-in-out"
         style={{
           width: 132,
           height: 132,
           transform: scale,
-          background: `radial-gradient(circle at 32% 28%, ${T.sage}, ${T.pine} 70%, ${T.pineDeep})`,
-          boxShadow: `0 18px 50px ${T.sage}66, inset 0 2px 12px #ffffff44`,
+          background: `radial-gradient(circle at 32% 28%, ${T.cyan}, ${color} 72%, ${T.pineDeep})`,
+          boxShadow: `0 22px 65px ${color}55, inset 0 2px 14px #ffffff66`,
           animation: running ? 'nx-float 4s ease-in-out infinite' : 'none',
         }}
-      />
+      >
+        <div className="absolute inset-5 rounded-full bg-white/10" />
+      </div>
     </div>
   )
 }
@@ -187,13 +246,8 @@ function MiniCalendar({ completedDays }) {
   const completedSet = new Set(completedDays)
   const cells = []
 
-  for (let i = 0; i < firstDay; i++) {
-    cells.push(null)
-  }
-
-  for (let d = 1; d <= daysInMonth; d++) {
-    cells.push(d)
-  }
+  for (let i = 0; i < firstDay; i++) cells.push(null)
+  for (let d = 1; d <= daysInMonth; d++) cells.push(d)
 
   return (
     <Card className="p-5">
@@ -202,7 +256,10 @@ function MiniCalendar({ completedDays }) {
           Activity Calendar
         </h3>
 
-        <span className="text-xs" style={{ color: T.faint }}>
+        <span
+          className="rounded-full px-3 py-1 text-xs font-bold"
+          style={{ background: T.purpleSoft, color: T.purple }}
+        >
           {monthName} {year}
         </span>
       </div>
@@ -230,8 +287,8 @@ function MiniCalendar({ completedDays }) {
               key={dateKey}
               className="flex aspect-square items-center justify-center rounded-xl text-xs font-semibold transition"
               style={{
-                background: completed ? T.pine : isToday ? T.mist : 'transparent',
-                color: completed ? '#fff' : isToday ? T.pine : T.inkSoft,
+                background: completed ? gradient : isToday ? T.purpleSoft : 'transparent',
+                color: completed ? '#fff' : isToday ? T.purple : T.inkSoft,
                 border: isToday && !completed ? `1px solid ${T.sageSoft}` : '1px solid transparent',
               }}
             >
@@ -252,9 +309,19 @@ function MeditationTimer({ session, onComplete }) {
   const [running, setRunning] = useState(false)
   const [left, setLeft] = useState(session.seconds)
   const [phaseIndex, setPhaseIndex] = useState(0)
+  const [completedRounds, setCompletedRounds] = useState(0)
   const phaseTimer = useRef(null)
 
   const phase = session.cycle[phaseIndex % session.cycle.length]
+  const progress = Math.round(((session.seconds - left) / session.seconds) * 100)
+  const Icon = session.icon
+
+  useEffect(() => {
+    setRunning(false)
+    setLeft(session.seconds)
+    setPhaseIndex(0)
+    setCompletedRounds(0)
+  }, [session])
 
   useEffect(() => {
     if (!running) return
@@ -279,67 +346,191 @@ function MeditationTimer({ session, onComplete }) {
     if (!running) return
 
     phaseTimer.current = setTimeout(() => {
-      setPhaseIndex((i) => i + 1)
+      setPhaseIndex((i) => {
+        const next = i + 1
+
+        if (next % session.cycle.length === 0) {
+          setCompletedRounds((rounds) => rounds + 1)
+        }
+
+        return next
+      })
     }, phase.dur * 1000)
 
     return () => clearTimeout(phaseTimer.current)
-  }, [running, phaseIndex, phase.dur])
+  }, [running, phaseIndex, phase.dur, session.cycle.length])
 
   const reset = () => {
     setRunning(false)
     setLeft(session.seconds)
     setPhaseIndex(0)
+    setCompletedRounds(0)
   }
 
   const mm = String(Math.floor(left / 60)).padStart(2, '0')
   const ss = String(left % 60).padStart(2, '0')
 
   return (
-    <Card className="p-6 text-center">
+    <Card className="overflow-hidden">
       <div
-        className="mx-auto mb-3 flex w-fit items-center gap-2 rounded-full px-3 py-1 text-xs font-bold text-white"
-        style={{ background: T.pine }}
+        className="relative p-6 text-white"
+        style={{
+          background: `linear-gradient(135deg, ${T.cyan}, ${session.color})`,
+        }}
       >
-        <Wind size={13} />
-        {session.title}
+        <div className="absolute -right-16 -top-16 h-44 w-44 rounded-full bg-white/10" />
+        <div className="absolute -bottom-20 -left-20 h-52 w-52 rounded-full bg-white/10" />
+
+        <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-xs font-bold">
+              <Icon size={14} />
+              {session.level} · {session.mood}
+            </div>
+
+            <h2 className="text-2xl font-bold">
+              {session.title}
+            </h2>
+
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/85">
+              {session.desc}
+            </p>
+          </div>
+
+          <div className="rounded-3xl bg-white/15 px-5 py-4 text-center backdrop-blur">
+            <p className="text-xs font-bold uppercase tracking-wide text-white/75">
+              Remaining
+            </p>
+
+            <p className="text-3xl font-bold">
+              {mm}:{ss}
+            </p>
+          </div>
+        </div>
       </div>
 
-      <h3 className="text-xl font-bold" style={{ color: T.ink }}>
-        {session.desc}
-      </h3>
+      <div className="grid gap-6 p-6 lg:grid-cols-[1fr_280px]">
+        <div className="flex flex-col items-center justify-center rounded-[2rem] bg-[#F9FAFB] p-6">
+          <Orb phase={phase.phase} running={running} color={session.color} />
 
-      <div className="my-6 flex justify-center">
-        <Orb phase={phase.phase} running={running} />
-      </div>
+          <div className="mt-4 text-center">
+            <p className="text-3xl font-bold" style={{ color: session.color }}>
+              {running ? phase.label : left === 0 ? 'Completed' : 'Ready'}
+            </p>
 
-      <p className="text-2xl font-bold" style={{ color: T.pine }}>
-        {running ? phase.label : 'Ready'}
-      </p>
+            <p className="mt-2 max-w-md text-sm leading-relaxed" style={{ color: T.inkSoft }}>
+              {session.prompt}
+            </p>
+          </div>
 
-      <p className="mt-1 text-sm" style={{ color: T.faint }}>
-        {mm}:{ss} remaining
-      </p>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => setRunning((v) => !v)}
+              className="flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:scale-[1.02]"
+              style={{
+                background: `linear-gradient(90deg, ${T.cyan}, ${session.color})`,
+              }}
+            >
+              {running ? <Pause size={17} /> : <Play size={17} />}
+              {running ? 'Pause session' : left === 0 ? 'Restart session' : 'Start session'}
+            </button>
 
-      <div className="mt-5 flex justify-center gap-3">
-        <button
-          type="button"
-          onClick={() => setRunning((v) => !v)}
-          className="flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-white"
-          style={{ background: T.pine }}
-        >
-          {running ? <Pause size={16} /> : <Play size={16} />}
-          {running ? 'Pause' : 'Start'}
-        </button>
+            <button
+              type="button"
+              onClick={reset}
+              className="flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-bold transition hover:scale-[1.02]"
+              style={{
+                borderColor: session.color,
+                color: session.color,
+                background: session.soft,
+              }}
+            >
+              <RotateCcw size={17} />
+              Reset
+            </button>
+          </div>
+        </div>
 
-        <button
-          type="button"
-          onClick={reset}
-          className="flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-bold"
-          style={{ borderColor: T.sageSoft, color: T.pine }}
-        >
-          <RotateCcw size={16} />
-          Reset
-        </button>
+        <div className="space-y-4">
+          <div className="rounded-[2rem] border border-[#E5E7EB] bg-white p-5">
+            <div className="mb-3 flex items-center justify-between">
+              <span className="text-sm font-bold" style={{ color: T.ink }}>
+                Session progress
+              </span>
+
+              <span
+                className="rounded-full px-3 py-1 text-xs font-bold"
+                style={{
+                  background: session.soft,
+                  color: session.color,
+                }}
+              >
+                {progress}%
+              </span>
+            </div>
+
+            <div className="h-3 overflow-hidden rounded-full bg-[#F1F3F8]">
+              <div
+                className="h-full rounded-full transition-all duration-700"
+                style={{
+                  width: `${progress}%`,
+                  background: `linear-gradient(90deg, ${T.cyan}, ${session.color})`,
+                }}
+              />
+            </div>
+          </div>
+
+          <div className="rounded-[2rem] border border-[#E5E7EB] bg-white p-5">
+            <div className="mb-4 flex items-center gap-2">
+              <Activity size={18} style={{ color: session.color }} />
+
+              <h3 className="text-sm font-bold" style={{ color: T.ink }}>
+                Breathing pattern
+              </h3>
+            </div>
+
+            <div className="space-y-2">
+              {session.cycle.map((step, index) => {
+                const active = index === phaseIndex % session.cycle.length
+
+                return (
+                  <div
+                    key={`${step.label}-${index}`}
+                    className="flex items-center justify-between rounded-2xl px-3 py-2 text-sm transition"
+                    style={{
+                      background: active ? session.soft : '#F9FAFB',
+                      color: active ? session.color : T.inkSoft,
+                    }}
+                  >
+                    <span className="font-semibold">{step.label}</span>
+                    <span className="text-xs font-bold">{step.dur}s</span>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div className="rounded-[1.5rem] bg-[#F9FAFB] p-4">
+              <p className="text-xs font-bold uppercase tracking-wide" style={{ color: T.faint }}>
+                Rounds
+              </p>
+              <p className="mt-1 text-2xl font-bold" style={{ color: session.color }}>
+                {completedRounds}
+              </p>
+            </div>
+
+            <div className="rounded-[1.5rem] bg-[#F9FAFB] p-4">
+              <p className="text-xs font-bold uppercase tracking-wide" style={{ color: T.faint }}>
+                Status
+              </p>
+              <p className="mt-1 text-sm font-bold" style={{ color: running ? session.color : T.ink }}>
+                {running ? 'In progress' : left === 0 ? 'Done' : 'Not started'}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </Card>
   )
@@ -356,9 +547,6 @@ export default function Learn() {
   const workoutProgress = Math.round((completedWorkout.length / WORKOUTS.length) * 100)
   const todayCompleted = completedDays.includes(todayKey())
 
-  // FIXED:
-  // The streak button now becomes active after image upload.
-  // Meditation and workout are optional.
   const canCompleteStreak = Boolean(proofImage) && !todayCompleted
 
   const currentStreak = useMemo(() => {
@@ -421,6 +609,16 @@ export default function Learn() {
           50% { transform: scale(1.03); }
         }
 
+        @keyframes nx-spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        @keyframes nx-orb-glow {
+          0%, 100% { transform: scale(.92); opacity: .6; }
+          50% { transform: scale(1.08); opacity: 1; }
+        }
+
         .nx-active-card {
           animation: nx-pulse-soft 2.4s ease-in-out infinite;
         }
@@ -430,7 +628,7 @@ export default function Learn() {
         <div className="mb-5">
           <div
             className="mb-3 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold text-white"
-            style={{ background: T.pine }}
+            style={{ background: gradient }}
           >
             <Sparkles size={14} />
             Meditation & wellness
@@ -453,9 +651,10 @@ export default function Learn() {
               onClick={() => setActiveTab(tab)}
               className="rounded-full px-5 py-2 text-sm font-bold transition"
               style={{
-                background: activeTab === tab ? T.pine : T.card,
+                background: activeTab === tab ? gradient : T.card,
                 color: activeTab === tab ? '#fff' : T.inkSoft,
-                boxShadow: activeTab === tab ? `0 8px 20px ${T.pine}33` : '0 1px 3px rgba(0,0,0,.06)',
+                boxShadow: activeTab === tab ? `0 8px 20px rgba(109,40,217,.25)` : '0 1px 3px rgba(0,0,0,.06)',
+                border: `1px solid ${activeTab === tab ? 'transparent' : T.line}`,
               }}
             >
               {tab}
@@ -467,33 +666,54 @@ export default function Learn() {
           <div className="space-y-5 lg:col-span-2">
             {activeTab === 'Meditation' && (
               <>
-                <div
-                  className="relative overflow-hidden rounded-[2rem] p-6 text-white"
-                  style={{
-                    background: `linear-gradient(160deg, ${T.sage} 0%, ${T.pine} 60%, ${T.pineDeep} 100%)`,
-                  }}
-                >
-                  <div className="absolute right-5 top-5 rounded-full bg-white/20 px-3 py-1 text-xs font-bold">
-                    Recommended
-                  </div>
+                <div className="grid gap-4 md:grid-cols-3">
+                  {SESSIONS.map((session) => {
+                    const Icon = session.icon
+                    const active = activeSession.id === session.id
 
-                  <div className="flex min-h-[190px] flex-col items-center justify-center text-center">
-                    <button
-                      type="button"
-                      onClick={() => setActiveSession(SESSIONS[0])}
-                      className="mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-white/50 bg-white/20 transition hover:scale-105"
-                    >
-                      <Play size={26} />
-                    </button>
+                    return (
+                      <button
+                        key={session.id}
+                        type="button"
+                        onClick={() => setActiveSession(session)}
+                        className="rounded-[2rem] border p-5 text-left transition hover:-translate-y-1 hover:shadow-lg"
+                        style={{
+                          background: active ? session.soft : T.card,
+                          borderColor: active ? session.color : T.line,
+                          boxShadow: active ? `0 18px 40px ${session.color}22` : '0 8px 24px rgba(17,24,39,.04)',
+                        }}
+                      >
+                        <div
+                          className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl text-white"
+                          style={{
+                            background: `linear-gradient(135deg, ${T.cyan}, ${session.color})`,
+                          }}
+                        >
+                          <Icon size={22} />
+                        </div>
 
-                    <h2 className="text-2xl font-bold">
-                      Center the Mind. Free the Soul.
-                    </h2>
+                        <div className="mb-2 flex items-center justify-between gap-2">
+                          <h3 className="text-sm font-bold" style={{ color: T.ink }}>
+                            {session.short}
+                          </h3>
 
-                    <p className="mt-2 max-w-md text-sm text-white/80">
-                      Start with a short breathing session to calm your body and reset your focus.
-                    </p>
-                  </div>
+                          <span
+                            className="rounded-full px-2 py-1 text-[11px] font-bold"
+                            style={{
+                              background: active ? '#fff' : session.soft,
+                              color: session.color,
+                            }}
+                          >
+                            {Math.round(session.seconds / 60)} min
+                          </span>
+                        </div>
+
+                        <p className="text-xs leading-relaxed" style={{ color: T.inkSoft }}>
+                          {session.title}
+                        </p>
+                      </button>
+                    )
+                  })}
                 </div>
 
                 <MeditationTimer
@@ -501,42 +721,60 @@ export default function Learn() {
                   onComplete={() => setMeditationDone(true)}
                 />
 
-                <div className="grid gap-4 md:grid-cols-2">
-                  {SESSIONS.map((session) => (
-                    <Card
-                      key={session.id}
-                      className={`cursor-pointer p-4 transition hover:-translate-y-1 hover:shadow-md ${
-                        activeSession.id === session.id ? 'nx-active-card' : ''
-                      }`}
-                      style={{
-                        borderColor: activeSession.id === session.id ? T.pine : T.line,
-                      }}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => setActiveSession(session)}
-                        className="flex w-full items-start gap-3 text-left"
-                      >
-                        <div className="rounded-2xl p-3" style={{ background: T.mist, color: T.pine }}>
-                          <Wind size={20} />
-                        </div>
+                <Card className="p-5">
+                  <div className="flex items-start gap-4">
+                    <div className="rounded-2xl p-3 text-white" style={{ background: gradient }}>
+                      <Headphones size={22} />
+                    </div>
 
-                        <div>
-                          <h3 className="text-sm font-bold" style={{ color: T.ink }}>
-                            {session.title}
-                          </h3>
+                    <div>
+                      <h3 className="text-lg font-bold" style={{ color: T.ink }}>
+                        Guided reflection after meditation
+                      </h3>
 
-                          <p className="mt-1 text-xs leading-relaxed" style={{ color: T.inkSoft }}>
-                            {session.desc}
-                          </p>
+                      <p className="mt-2 text-sm leading-relaxed" style={{ color: T.inkSoft }}>
+                        After finishing a session, take 30 seconds to notice your breathing, body tension, and emotional state. This helps you connect the meditation habit with real self-awareness.
+                      </p>
+                    </div>
+                  </div>
+                </Card>
 
-                          <p className="mt-2 text-xs font-bold" style={{ color: T.pine }}>
-                            {Math.round(session.seconds / 60)} min
-                          </p>
-                        </div>
-                      </button>
-                    </Card>
-                  ))}
+                <div className="grid gap-4 md:grid-cols-3">
+                  <Card className="p-5">
+                    <Zap size={22} style={{ color: T.purple }} />
+
+                    <h3 className="mt-3 text-sm font-bold" style={{ color: T.ink }}>
+                      Quick reset
+                    </h3>
+
+                    <p className="mt-1 text-xs leading-relaxed" style={{ color: T.inkSoft }}>
+                      Use this before studying, working, or when your mind feels overloaded.
+                    </p>
+                  </Card>
+
+                  <Card className="p-5">
+                    <Brain size={22} style={{ color: T.purple }} />
+
+                    <h3 className="mt-3 text-sm font-bold" style={{ color: T.ink }}>
+                      Mind clarity
+                    </h3>
+
+                    <p className="mt-1 text-xs leading-relaxed" style={{ color: T.inkSoft }}>
+                      Breathing gives your nervous system a simple rhythm to follow.
+                    </p>
+                  </Card>
+
+                  <Card className="p-5">
+                    <Moon size={22} style={{ color: T.purple }} />
+
+                    <h3 className="mt-3 text-sm font-bold" style={{ color: T.ink }}>
+                      Better rest
+                    </h3>
+
+                    <p className="mt-1 text-xs leading-relaxed" style={{ color: T.inkSoft }}>
+                      A slower exhale can help your body move toward a calmer state.
+                    </p>
+                  </Card>
                 </div>
               </>
             )}
@@ -545,7 +783,7 @@ export default function Learn() {
               <>
                 <Card className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="rounded-3xl p-4 text-white" style={{ background: T.amber }}>
+                    <div className="rounded-3xl p-4 text-white" style={{ background: gradient }}>
                       <Flame size={34} />
                     </div>
 
@@ -561,7 +799,7 @@ export default function Learn() {
                       {todayCompleted && (
                         <div
                           className="mt-3 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold text-white"
-                          style={{ background: T.pine }}
+                          style={{ background: gradient }}
                         >
                           <CheckCircle2 size={13} />
                           Today completed
@@ -572,7 +810,7 @@ export default function Learn() {
                 </Card>
 
                 <Card className="p-5">
-                  <h3 className="mb-3 text-sm font-bold uppercase tracking-wide" style={{ color: T.pine }}>
+                  <h3 className="mb-3 text-sm font-bold uppercase tracking-wide" style={{ color: T.purple }}>
                     Daily proof upload
                   </h3>
 
@@ -591,7 +829,7 @@ export default function Learn() {
                       />
                     ) : (
                       <>
-                        <Camera size={34} style={{ color: T.pine }} />
+                        <Camera size={34} style={{ color: T.purple }} />
 
                         <p className="mt-3 text-sm font-bold" style={{ color: T.ink }}>
                           Upload today’s picture
@@ -616,7 +854,7 @@ export default function Learn() {
                     onClick={markTodayComplete}
                     disabled={!canCompleteStreak}
                     className="mt-4 flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-bold text-white transition disabled:cursor-not-allowed disabled:opacity-50"
-                    style={{ background: T.pine }}
+                    style={{ background: gradient }}
                   >
                     <Upload size={17} />
                     {todayCompleted ? 'Streak already counted today' : 'Count today’s streak'}
@@ -629,7 +867,7 @@ export default function Learn() {
                   )}
 
                   {proofImage && !todayCompleted && (
-                    <p className="mt-2 text-center text-xs" style={{ color: T.pine }}>
+                    <p className="mt-2 text-center text-xs" style={{ color: T.purple }}>
                       Picture uploaded. You can now count today’s streak.
                     </p>
                   )}
@@ -641,7 +879,7 @@ export default function Learn() {
               <>
                 <Card className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="rounded-3xl p-4 text-white" style={{ background: T.pine }}>
+                    <div className="rounded-3xl p-4 text-white" style={{ background: gradient }}>
                       <Dumbbell size={34} />
                     </div>
 
@@ -659,12 +897,12 @@ export default function Learn() {
                           className="h-full rounded-full transition-all duration-700"
                           style={{
                             width: `${workoutProgress}%`,
-                            background: T.pine,
+                            background: gradient,
                           }}
                         />
                       </div>
 
-                      <p className="mt-2 text-xs font-bold" style={{ color: T.pine }}>
+                      <p className="mt-2 text-xs font-bold" style={{ color: T.purple }}>
                         {workoutProgress}% completed
                       </p>
                     </div>
@@ -680,8 +918,8 @@ export default function Learn() {
                         key={item.id}
                         className="p-4 transition hover:-translate-y-1 hover:shadow-md"
                         style={{
-                          borderColor: done ? T.pine : T.line,
-                          background: done ? '#E3F2EA' : T.card,
+                          borderColor: done ? T.purple : T.line,
+                          background: done ? T.purpleSoft : T.card,
                         }}
                       >
                         <button
@@ -692,8 +930,8 @@ export default function Learn() {
                           <div
                             className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-sm font-bold"
                             style={{
-                              background: done ? T.pine : T.mist,
-                              color: done ? '#fff' : T.pine,
+                              background: done ? gradient : T.purpleSoft,
+                              color: done ? '#fff' : T.purple,
                             }}
                           >
                             {done ? <CheckCircle2 size={18} /> : index + 1}
@@ -711,7 +949,7 @@ export default function Learn() {
                             <div className="mt-2 flex flex-wrap gap-2">
                               <span
                                 className="inline-flex items-center gap-1 rounded-full px-2 py-1 text-[11px] font-bold"
-                                style={{ background: T.mist, color: T.pine }}
+                                style={{ background: T.purpleSoft, color: T.purple }}
                               >
                                 <Timer size={11} />
                                 {item.duration}
@@ -732,8 +970,8 @@ export default function Learn() {
                 </div>
 
                 {workoutProgress === 100 && (
-                  <Card className="p-5 text-center" style={{ background: T.mist }}>
-                    <CheckCircle2 className="mx-auto" size={32} style={{ color: T.pine }} />
+                  <Card className="p-5 text-center" style={{ background: T.purpleSoft }}>
+                    <CheckCircle2 className="mx-auto" size={32} style={{ color: T.purple }} />
 
                     <h3 className="mt-2 text-lg font-bold" style={{ color: T.ink }}>
                       Workout completed
@@ -751,16 +989,16 @@ export default function Learn() {
           <div className="space-y-4">
             <MiniCalendar completedDays={completedDays} />
 
-            <Card className="p-5" style={{ background: T.mist, border: 'none' }}>
+            <Card className="p-5" style={{ background: T.purpleSoft, border: 'none' }}>
               <div className="flex items-center gap-2">
-                <Flame size={20} style={{ color: T.amber }} />
+                <Flame size={20} style={{ color: T.purple }} />
 
                 <h3 className="text-sm font-bold" style={{ color: T.ink }}>
                   Current streak
                 </h3>
               </div>
 
-              <p className="mt-3 text-4xl font-bold" style={{ color: T.pine }}>
+              <p className="mt-3 text-4xl font-bold" style={{ color: T.purple }}>
                 {currentStreak}
               </p>
 
@@ -805,7 +1043,7 @@ export default function Learn() {
 function ChecklistItem({ done, label }) {
   return (
     <div className="flex items-center gap-2 rounded-xl bg-white/10 p-2">
-      <CheckCircle2 size={14} color={done ? '#A9CABA' : 'rgba(255,255,255,.35)'} />
+      <CheckCircle2 size={14} color={done ? '#C4B5FD' : 'rgba(255,255,255,.35)'} />
 
       <span className="text-xs font-semibold text-white/85">
         {label}

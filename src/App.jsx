@@ -10,6 +10,7 @@ import CheckIn from './pages/CheckIn'
 import Assistant from './pages/Assistant'
 import Community from './pages/Community'
 import Learn from './pages/Learn'
+import Journal from './pages/Journal'
 
 function Protected({ children }) {
   const { user, loading } = useAuth()
@@ -51,6 +52,7 @@ export default function App() {
             <Route path="assistant" element={<Assistant />} />
             <Route path="community" element={<Community />} />
             <Route path="learn" element={<Learn />} />
+              <Route path="journal" element={<Journal />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />
